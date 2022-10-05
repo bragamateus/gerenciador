@@ -23,15 +23,11 @@ public class ListaEmpresasServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Banco banco = new Banco();
 		List<Empresa> lista = banco.getEmpresas();
+		request.setAttribute("empresas", lista);
 		
-		PrintWriter out = response.getWriter();
-		out.println("<html><body>");
-		out.println("<ul>");
-		for (Empresa empresa: lista) {
-			out.println("<li>" + empresa.getNome() + "</li>");
-		}
-		out.println("</ul>");
-		out.println("</html></body>");
+		var rd = request.getRequestDispatcher("/listaEmpresas.jsp");
+		rd.forward(request, response);
+		
 	}
 
 
